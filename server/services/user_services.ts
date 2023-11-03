@@ -9,4 +9,4 @@ export const getUserById = async (id: string, res:Response) => {
         const user = JSON.parse(userJson);
         res.status(201).json({success: true, user,});
     }
-}
+};
