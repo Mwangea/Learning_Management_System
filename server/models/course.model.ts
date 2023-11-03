@@ -130,7 +130,19 @@ const courseSchema = new Schema<ICourse> ({
     benefits: [{title: String}],
     prerequisites: [{title: String}],
     reviews: [reviewSchema],
-    courseData: [courseDataSchema]
+    courseData: [courseDataSchema],
+    ratings: {
+        type: Number,
+        default: 0,
+    },
+    purchased: {
+        type:Number,
+        default: 0,
+    },
 
 });
+
+const CourseModel: Model<ICourse> = mongoose.model("Course", courseSchema);
+
+export default CourseModel;
 
