@@ -1,3 +1,5 @@
+//import { getAllUsers } from './user_controller';
+import {  getAllUsersServices, updateUserRoleServices } from './../services/user_services';
 require('dotenv').config();
 
 import { Request, Response, NextFunction } from "express";
@@ -364,3 +366,27 @@ export const UpdateProfile = CatchAsyncError(async(req:Request, res:Response, ne
         return next(new ErrorHandler(error.message, 400));
     }
 });
+
+
+// get all users --only for admin
+export const getAllUsers = CatchAsyncError(
+    async (req:Request, res:Response, next:NextFunction) =>{
+        try {
+            getAllUsersServices(res);
+        } catch (error: any) {
+            return next(new ErrorHandler(error.message, 400));
+            
+        }
+    }
+);
+
+//update user role ---only admin 
+export const updateUserRole = CatchAsyncError(async(req:Request, res:Response, next:NextFunction) => {
+    try {
+        const {id,role} = req.body;
+        updateUserRoleServices(res,id,role);
+    } catch (error: any) {
+        return next(new ErrorHandler(error.message, 400));
+        
+    }
+})

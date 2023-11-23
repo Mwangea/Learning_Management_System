@@ -4,11 +4,12 @@ import ErrorHandler from "../utils/Errorhandler";
 import OrderModel, {IOrder} from "../models/orderModel";
 import userModel from "../models/user_model";
 import CourseModel from "../models/course.model";
-import { newOrder } from "../services/order.services";
+import { getAllOrdersServices, newOrder } from "../services/order.services";
 import path from "path";
 import ejs from 'ejs';
 import sendMail from '../utils/sendMail';
 import NotificationModel from "../models/notificationModel";
+//import { getAllUsersServices } from "../services/user_services";
 
 
 
@@ -89,4 +90,16 @@ export const createOrder = CatchAsyncError(async(req:Request, res:Response, next
     } catch (error: any) {
         return next(new ErrorHandler(error.message, 400))
     }
-})
+});
+
+// get all orders --only for admin
+export const getAllOrders = CatchAsyncError(
+    async (req:Request, res:Response, next:NextFunction) =>{
+        try {
+            getAllOrdersServices(res);
+        } catch (error: any) {
+            return next(new ErrorHandler(error.message, 400));
+            
+        }
+    }
+);
