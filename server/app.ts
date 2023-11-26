@@ -13,9 +13,7 @@ import LayoutRouter from "./routes/layout.route";
 
 
 // body parser 
-app.use(express.json({
-    limit: "50mb"
-}));
+app.use(express.json());
 
 //cookie parser
 app.use(cookieParser());
